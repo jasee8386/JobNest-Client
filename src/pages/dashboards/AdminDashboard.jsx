@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import { useSelector } from "react-redux";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
   const [jobs, setJobs] = useState([]);
@@ -8,7 +10,7 @@ const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("users"); // users, jobs, applications
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
+ const theme = useSelector((state) => state.theme.value);
   const token = localStorage.getItem("token");
   const backendBaseUrl = import.meta.env.VITE_BACKEND_API;
 
@@ -62,25 +64,27 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-4">Admin Dashboard</h1>
+     <div data-theme={theme} className="min-h-screen bg-base-100">
+      <Header />
+    <div className="p-6 bg-gray-50 min-h-screen">
+      <h1 className="text-4xl md:text-5xl font-extrabold mb-6 text-gray-800">Admin Dashboard</h1>
 
       {/* Tabs */}
-      <div className="flex gap-4 mb-6">
+      <div className="flex gap-4 mb-8">
         <button
-          className={`px-4 py-2 ${activeTab === "users" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+          className={`px-5 py-2 rounded-lg font-semibold transition-colors duration-300 ${activeTab === "users" ? "bg-blue-500 text-white shadow-lg" : "bg-gray-200 hover:bg-gray-300"}`}
           onClick={() => setActiveTab("users")}
         >
           Users
         </button>
         <button
-          className={`px-4 py-2 ${activeTab === "jobs" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+          className={`px-5 py-2 rounded-lg font-semibold transition-colors duration-300 ${activeTab === "jobs" ? "bg-blue-500 text-white shadow-lg" : "bg-gray-200 hover:bg-gray-300"}`}
           onClick={() => setActiveTab("jobs")}
         >
           Jobs
         </button>
         <button
-          className={`px-4 py-2 ${activeTab === "applications" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+          className={`px-5 py-2 rounded-lg font-semibold transition-colors duration-300 ${activeTab === "applications" ? "bg-blue-500 text-white shadow-lg" : "bg-gray-200 hover:bg-gray-300"}`}
           onClick={() => setActiveTab("applications")}
         >
           Applications
@@ -88,33 +92,33 @@ const AdminDashboard = () => {
       </div>
 
       {loading ? (
-        <p>Loading...</p>
+        <p className="text-gray-500 text-lg">Loading...</p>
       ) : error ? (
-        <p className="text-red-500">{error}</p>
+        <p className="text-red-500 text-lg">{error}</p>
       ) : (
-        <div>
+        <div className="overflow-x-auto rounded-xl shadow-lg bg-white">
           {/* Users Table */}
           {activeTab === "users" && (
             <table className="w-full border">
-              <thead>
-                <tr className="bg-gray-100">
-                  <th className="p-2 border">Name</th>
-                  <th className="p-2 border">Email</th>
-                  <th className="p-2 border">Role</th>
-                  <th className="p-2 border">Verified</th>
-                  <th className="p-2 border">Actions</th>
+              <thead className="bg-gray-100">
+                <tr >
+                  <th className="p-3 text-left text-gray-700">Name</th>
+                  <th className="p-3 text-left text-gray-700">Email</th>
+                  <th className="p-3 text-left text-gray-700">Role</th>
+                  <th className="p-3 text-left text-gray-700">Verified</th>
+                  <th className="p-3 text-left text-gray-700">Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-gray-200">
                 {users.map((u) => (
-                  <tr key={u._id}>
-                    <td className="p-2 border">{u.name}</td>
-                    <td className="p-2 border">{u.email}</td>
-                    <td className="p-2 border">{u.role}</td>
-                    <td className="p-2 border">{u.isVerified ? "Yes" : "No"}</td>
-                    <td className="p-2 border">
+                  <tr key={u._id} className="hover:bg-gray-50 transition-colors">
+                    <td className="p-3">{u.name}</td>
+                    <td className="p-3">{u.email}</td>
+                    <td className="p-3">{u.role}</td>
+                    <td className="p-3">{u.isVerified ? "Yes" : "No"}</td>
+                    <td className="p-3">
                       <button
-                        className="bg-red-500 text-white px-2 py-1 rounded"
+                        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg transition-colors duration-300"
                         onClick={() => handleDeleteUser(u._id)}
                       >
                         Delete
@@ -128,25 +132,25 @@ const AdminDashboard = () => {
 
           {/* Jobs Table */}
           {activeTab === "jobs" && (
-            <table className="w-full border">
-              <thead>
-                <tr className="bg-gray-100">
-                  <th className="p-2 border">Title</th>
-                  <th className="p-2 border">Employer</th>
-                  <th className="p-2 border">Verified</th>
-                  <th className="p-2 border">Actions</th>
+            <table className="table-auto w-full divide-y divide-gray-200">
+              <thead className="bg-gray-100">
+                <tr >
+                  <th className="p-3 text-left text-gray-700">Title</th>
+                  <th className="p-3 text-left text-gray-700">Employer</th>
+                  <th className="p-3 text-left text-gray-700">Verified</th>
+                  <th className="p-3 text-left text-gray-700">Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-gray-200">
                 {jobs.map((job) => (
-                  <tr key={job._id}>
-                    <td className="p-2 border">{job.title}</td>
-                    <td className="p-2 border">{job.employer?.name}</td>
-                    <td className="p-2 border">{job.isVerified ? "Yes" : "No"}</td>
-                    <td className="p-2 border">
+                  <tr key={job._id} className="hover:bg-gray-50 transition-colors">
+                    <td className="p-3">{job.title}</td>
+                    <td className="p-3">{job.employer?.name}</td>
+                    <td className="p-3">{job.isVerified ? "Yes" : "No"}</td>
+                    <td className="p-3">
                       {!job.isVerified && (
                         <button
-                          className="bg-green-500 text-white px-2 py-1 rounded"
+                          className="bg-green-500 hover:bg-green-600  text-white px-3 py-1 rounded-lg transition-colors duration-300"
                           onClick={() => handleVerifyJob(job._id)}
                         >
                           Verify
@@ -161,22 +165,22 @@ const AdminDashboard = () => {
 
           {/* Applications Table */}
           {activeTab === "applications" && (
-            <table className="w-full border">
-              <thead>
-                <tr className="bg-gray-100">
-                  <th className="p-2 border">Job</th>
-                  <th className="p-2 border">Applicant</th>
-                  <th className="p-2 border">Status</th>
-                  <th className="p-2 border">Applied At</th>
+            <table className="table-auto w-full divide-y divide-gray-200">
+              <thead  className="bg-gray-100">
+                <tr>
+                  <th className="p-3 text-left text-gray-700">Job</th>
+                  <th className="p-3 text-left text-gray-700">Applicant</th>
+                  <th className="p-3 text-left text-gray-700">Status</th>
+                  <th className="p-3 text-left text-gray-700">Applied At</th>
                 </tr>
               </thead>
               <tbody>
                 {applications.map((app) => (
                   <tr key={app._id}>
-                    <td className="p-2 border">{app.job?.title}</td>
-                    <td className="p-2 border">{app.applicant?.name}</td>
-                    <td className="p-2 border">{app.status}</td>
-                    <td className="p-2 border">{new Date(app.appliedAt).toLocaleDateString()}</td>
+                    <td className="p-3 ">{app.job?.title}</td>
+                    <td className="p-3 ">{app.applicant?.name}</td>
+                    <td className="p-3 ">{app.status}</td>
+                    <td className="p-3 ">{new Date(app.appliedAt).toLocaleDateString()}</td>
                   </tr>
                 ))}
               </tbody>
@@ -184,6 +188,9 @@ const AdminDashboard = () => {
           )}
         </div>
       )}
+    </div>
+    
+<Footer/>
     </div>
   );
 };

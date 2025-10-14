@@ -6,15 +6,9 @@ import logo  from "../assets/logo.png"
 
 //import "./styles/global.css";
 const Header = () => {
-  const [search, setSearch] = useState("");
+
 const navigate = useNavigate();
 
-const handleSearch = (e) => {
-  e.preventDefault();
-  if (search.trim()) {
-    navigate(`/jobs?search=${encodeURIComponent(search)}`);
-  }
-};
 
   const isAuthenticated = useSelector((state) => state.isAuthenticated.value);
   return (
@@ -41,12 +35,14 @@ const handleSearch = (e) => {
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-          >
-            <li>
-              <Link>About Us</Link>
+          ><li>
+              <Link to="/" className="hover:text-green-600">Home</Link>
             </li>
             <li>
-              <Link>Contact Us</Link>
+              <Link  to="/about">About Us</Link>
+            </li>
+            <li>
+              <Link  to="/contact">Contact Us</Link>
             </li>
           </ul>
         </div>
@@ -56,21 +52,19 @@ const handleSearch = (e) => {
 JobNest</Link>
       </div>
     <div className="navbar-center hidden lg:flex">
-  <form
-    onSubmit={handleSearch}
-    className="flex items-center gap-2"
-  >
-    <input
-      type="text"
-      placeholder="Search jobs..."
-      value={search}
-      onChange={(e) => setSearch(e.target.value)}
-      className="input input-bordered w-72"
-    />
-    <button type="submit" className="btn btn-primary">
-      Search
-    </button>
-  </form>
+ 
+    <ul className="menu menu-horizontal px-1">
+      <li>
+              <Link to="/" className="hover:text-green-600">Home</Link>
+            </li>
+            <li>
+              <Link  to="/about">About Us</Link>
+            </li>
+            <li>
+              <Link  to="/contact">Contact Us</Link>
+            </li>
+    </ul>
+  
 </div>
 
       <div className="navbar-end">

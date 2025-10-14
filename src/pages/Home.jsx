@@ -1,21 +1,35 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import axios from "axios";
 import * as jwt_decode from "jwt-decode";
 import { useSelector } from "react-redux";
+
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import JobCategories from "../components/JobCategories";
-import hero  from "../assets/hero.png"
+import BGImg  from "../assets/BGImg.png"
+import jobimg  from "../assets/jobimg.png"
+import { Search, MapPin } from "lucide-react"
 const Home = () => {
+ 
+const [location, setLocation] = useState("");
   const [jobs, setJobs] = useState([]);
   const [search, setSearch] = useState("");
+    const [title, setTitle] = useState("")
   const [role, setRole] = useState("");
   const token = localStorage.getItem("token");
   const backendBaseUrl = import.meta.env.VITE_BACKEND_API;
-
   const theme = useSelector((state) => state.theme.value);
+//Handle search 
+ const handleSearch = (e) => {
+  e.preventDefault();
+      const query = new URLSearchParams();
+    if (title.trim()) query.append("title", title);
+    if (location.trim()) query.append("location", location);
 
+    navigate(`/jobs?${query.toString()}`);
+
+};
   // Decode role from token
   useEffect(() => {
     if (token) {
@@ -50,57 +64,93 @@ const Home = () => {
     <div data-theme={theme} className="min-h-screen bg-base-100">
       <Header />
           
+
   {/* Hero Section */}
-  
 <section
-  className="hero min-h-screen"
+  className="BGImg min-h-screen bg-cover bg-center relative"
   style={{
-    backgroundImage:
-      `url(${hero})`,
+    backgroundImage: `url(${BGImg})`,
   }}
 >
-  <div className="hero-overlay"></div>
-  <div className="hero-content text-neutral-content text-center">
-    <div className="max-w-md">
-      <h1 className="mb-5 text-5xl font-bold">   Launch Your Career Today</h1>
-      <p className="mb-5">
-         Explore thousands of jobs and take the next step toward your dream career
+
+  <div className="absolute inset-0 bg-black/50"></div>
+
+ 
+  <div className="BGImg-content text-neutral-content text-center relative z-10 flex flex-col items-center gap-6">
+    <div className="max-w-2xl">
+     
+      <h1 className="mb-5 text-5xl font-bold">
+        Launch Your Career Today
+      </h1>
+      <p className="mb-5 text-lg">
+        Explore thousands of jobs and take the next step toward your dream career
       </p>
-      <div className="flex justify-center gap-4">
-      {!token && (
-        <>
-          <Link
-            to="/register"
-            className="bg-green-600 text-white px-6 py-2 rounded"
-          >
-            Register
-          </Link>
-          <Link
-            to="/login"
-            className="bg-blue-600 text-white px-6 py-2 rounded"
-          >
-            Login
-          </Link>
-        </>
-      )}
-      {role === "employer" && (
-        <Link
-          to="/dashboard/employer"
-          className="bg-purple-600 text-white px-6 py-2 rounded"
+
+     
+      <form
+        onSubmit={handleSearch}
+        className="flex w-full max-w-xl mx-auto bg-white rounded-full shadow-lg overflow-hidden mb-6"
+      >
+        <input
+          type="text"
+          placeholder="Search jobs..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="flex-1 px-4 py-2 text-gray-800 outline-none"
+        />
+        <button
+          type="submit"
+          className="bg-blue-600 text-white px-6 py-2"
         >
-          Post a Job
-        </Link>
-      )}
-    </div>
+          Search
+        </button>
+      </form>
+
+    
+      <div className="flex justify-center gap-4">
+        {!token && (
+          <>
+            <Link
+              to="/register"
+              className="bg-green-600 text-white px-6 py-2 rounded"
+            >
+              Register
+            </Link>
+            <Link
+              to="/login"
+              className="bg-blue-600 text-white px-6 py-2 rounded"
+            >
+              Login
+            </Link>
+          </>
+        )}
+        {role === "employer" && (
+          <Link
+            to="/dashboard/employer"
+            className="bg-purple-600 text-white px-6 py-2 rounded"
+          >
+            Post a Job
+          </Link>
+        )}
+      </div>
     </div>
   </div>
 </section>
 
 
+
       <JobCategories />
 
       {/* Job Listings */}
-      <section className="py-12 px-6">
+      <section className="jobimg min-h-screen bg-cover bg-center relative" style={{
+    backgroundImage: `url(${jobimg})`,
+  }}>
+    
+
+  <div className="absolute inset-0 bg-black/50"></div>
+  <div className="jobimg-content text-neutral-content text-center relative z-10 flex flex-col items-center gap-6">
+    <div className="max-w-2xl">
+      
         <h2 className="text-2xl font-bold mb-6 text-center">Latest Jobs</h2>
         {jobs.length === 0 ? (
           <p className="text-center">No jobs found.</p>
@@ -124,6 +174,8 @@ const Home = () => {
             ))}
           </div>
         )}
+      </div></div>
+ 
       </section>
 
       {/* How It Works Section */}

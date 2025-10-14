@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import * as jwt_decode from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
+
 import JobCategories from "../components/JobCategories";
 
 const JobListings = () => {
@@ -15,7 +16,7 @@ const JobListings = () => {
   const backendBaseUrl = import.meta.env.VITE_BACKEND_API;
   const theme = useSelector((state) => state.theme.value);
 
-  const role = token ? jwt_decode(token).role : "";
+  const role = token ? jwtDecode(token).role : "";
 
   const fetchJobs = async (query = "", pageNumber = 1) => {
     try {

@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
-
+import { useSelector } from "react-redux";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 const backendBaseUrl = import.meta.env.VITE_BACKEND_API;
 
 const Register = () => {
@@ -12,7 +14,7 @@ const Register = () => {
     password: "",
     role: "jobseeker", // default role
   });
-
+ const theme = useSelector((state) => state.theme.value);
   const submitHandler = (event) => {
     event.preventDefault();
     console.log(data);
@@ -40,6 +42,9 @@ const Register = () => {
   };
 
   return (
+      <div data-theme={theme} className="min-h-screen bg-base-100">
+      <Header />
+          
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-100 via-blue-100 to-purple-100">
       <form
         onSubmit={submitHandler}
@@ -124,6 +129,9 @@ const Register = () => {
           </p>
         </div>
       </form>
+    </div>
+    
+<Footer/>
     </div>
   );
 };

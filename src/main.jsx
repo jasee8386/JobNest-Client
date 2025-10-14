@@ -3,6 +3,8 @@ import { createRoot } from "react-dom/client";
 import { useSelector } from 'react-redux';
 import "./styles/global.css";
 import UserLayout from "./layouts/UserLayout";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 import { store } from "./globalState/store";
 import { Provider } from "react-redux";
@@ -28,6 +30,8 @@ const router = createBrowserRouter([
     element: <UserLayout />,
     children: [
       { path: "", element: <Home /> },
+      { path: "about", element: <About /> },
+      { path: "contact", element: <Contact /> },
       { path: "login", element: <Login /> },
       {
         path: "register",

@@ -2,6 +2,9 @@ import axios from "axios";
 import React, { useState,useEffect } from "react";
 import { Link,useNavigate} from "react-router-dom";
 import * as jwt_decode from "jwt-decode";
+import { useSelector } from "react-redux";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 const backendBaseUrl = import.meta.env.VITE_BACKEND_API;
 const Login = () => {
   const navigate = useNavigate();
@@ -24,7 +27,7 @@ const Login = () => {
       }
     }
   }, [navigate]);
-
+ const theme = useSelector((state) => state.theme.value);
   const submitHandler = (event) => {
     event.preventDefault();
     console.log(data);
@@ -50,6 +53,9 @@ const Login = () => {
     setError("");
   };
   return (
+      <div data-theme={theme} className="min-h-screen bg-base-100">
+      <Header />
+          
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100">
       <form
         onSubmit={submitHandler}
@@ -114,6 +120,9 @@ const Login = () => {
           </p>
         </div>
       </form>
+    </div>
+    
+<Footer/>
     </div>
   );
 };
