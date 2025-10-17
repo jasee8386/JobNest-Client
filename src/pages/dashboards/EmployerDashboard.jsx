@@ -3,7 +3,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-
+import employerdash from "../../assets/employerdash.jpg"
 const EmployerDashboard = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -87,20 +87,35 @@ const EmployerDashboard = () => {
   return (
     <div data-theme={theme} className="min-h-screen bg-gray-50">
       <Header />
+{/* ✅ Hero Section */}
+<section
+  className="relative bg-cover bg-center h-[60vh] flex items-center justify-center text-center text-white"
+  style={{
+    backgroundImage: `url(${employerdash})`,
+  }}
+>
+  {/* Overlay for better text contrast */}
+  <div className="absolute inset-0 bg-black/50"></div>
 
-      <div className="p-6 max-w-6xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-4xl font-extrabold text-gray-800">Employer Dashboard</h1>
-
-          {/* ✅ Rewritten: Toggle button instead of Link */}
-          <button
+  {/* Hero Content */}
+  <div className="relative z-10 max-w-2xl px-6">
+    <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
+      Hire Your Dream Team With JobNest 🚀
+    </h1>
+    <p className="text-lg md:text-xl text-gray-200">
+      Post jobs, manage applicants, and find the best talent from over thousand plus active jobseekers
+    </p><br/>
+    <button
             onClick={() => setShowForm(!showForm)}
             className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-lg shadow-md transition-all"
           >
             {showForm ? "Cancel" : "Post New Job"}
           </button>
-        </div>
+  </div>
+</section>
 
+      <div className="p-6 max-w-6xl mx-auto">
+       
         {/* ✅ Embedded Add Job form */}
         {showForm && (
           <form onSubmit={handleAddJob} className="bg-white p-6 rounded-lg shadow-lg mb-6 space-y-4">

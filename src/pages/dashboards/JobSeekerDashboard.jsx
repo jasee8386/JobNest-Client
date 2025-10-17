@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom"; 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-
+import seekerdash from "../../assets/seekerdash.jpg"
 const JobSeekerDashboard = () => {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -33,19 +33,36 @@ const JobSeekerDashboard = () => {
   return (
     <div data-theme={theme} className="min-h-screen bg-gray-50">
       <Header />
+{/* ✅ Hero Section */}
+<section
+  className="relative bg-cover bg-center h-[60vh] flex flex-col items-center justify-center text-center text-white"
+  style={{
+    backgroundImage: `url(${seekerdash})`,
+  }}
+>
+  {/* Overlay for readability */}
+  <div className="absolute inset-0 bg-black/50"></div>
+
+  <div className="relative z-10 max-w-2xl px-6">
+    <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
+      Your Career Starts Here 🌟
+    </h1>
+    <p className="text-lg md:text-xl text-gray-200 mb-8">
+      Discover verified jobs, apply instantly, and track your applications — all in one place.
+    </p>
+
+    {/* ✅ Browse Jobs Button */}
+    <Link
+      to="/jobs"
+      className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md text-lg font-semibold transition-all"
+    >
+      Browse Jobs
+    </Link>
+  </div>
+</section>
 
       <div className="p-6 max-w-6xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-4xl font-bold text-gray-800">Job Seeker Dashboard</h1>
-          {/* ✅ Submit new applications */}
-          <Link
-            to="/jobs" // Where the user can browse & apply for jobs
-            className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-lg shadow-md transition-all"
-          >
-            Browse Jobs
-          </Link>
-        </div>
-
+      
         {loading ? (
           <p className="text-gray-500 text-lg">Loading applications...</p>
         ) : error ? (

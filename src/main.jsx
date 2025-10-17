@@ -16,6 +16,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import EmployerDashboard from "./pages/dashboards/EmployerDashboard"
 import JobSeekerDashboard from "./pages/dashboards/JobSeekerDashboard";
 import AdminDashboard from "./pages/dashboards/AdminDashboard";
+import { AuthProvider } from "./context/AuthContext";
 const ThemeWrapper = ({ children }) => {
   const theme = useSelector((state) => state.theme.value);
   return (
@@ -53,12 +54,13 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+      <AuthProvider>
     <Provider store={store}>
           <ThemeWrapper>
 
         <RouterProvider router={router} /></ThemeWrapper>
 
     </Provider>
-          
+         </AuthProvider>   
   </StrictMode>
 );

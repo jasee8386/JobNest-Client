@@ -3,14 +3,14 @@ import { useSelector } from "react-redux";
 import { Link,useNavigate  } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import logo  from "../assets/logo.png"
-
+import { useAuth } from "../context/AuthContext";
 //import "./styles/global.css";
 const Header = () => {
 
 const navigate = useNavigate();
 
 
-  const isAuthenticated = useSelector((state) => state.isAuthenticated.value);
+ const { isAuthenticated, user, logout } = useAuth();
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
