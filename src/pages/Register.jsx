@@ -43,12 +43,7 @@ const Register = () => {
   };
 
   return (
-    <div
-      data-theme={theme}
-      className="min-h-screen bg-gradient-to-br from-green-100 via-blue-100 to-purple-100"
-    >
-      <Header />
-
+   
       <div className="flex items-center justify-center min-h-screen p-4">
         <div className="flex flex-col lg:flex-row bg-white shadow-2xl rounded-3xl overflow-hidden w-full max-w-4xl">
           {/* Optional left image */}
@@ -139,8 +134,7 @@ const Register = () => {
         </div>
       </div>
 
-      <Footer />
-    </div>
+  
   );
 };
 
