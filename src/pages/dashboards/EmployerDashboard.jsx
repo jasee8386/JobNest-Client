@@ -31,10 +31,10 @@ const EmployerDashboard = () => {
 
   // Fetch jobs
   useEffect(() => {
-    const fetchJobs = async () => {
+    const fetchJobs = async (category = "") => {
       setLoading(true);
       try {
-        const res = await axios.get(`${backendBaseUrl}/employer/jobs/my`, { headers });
+        const res = await axios.get(`${backendBaseUrl}/employer/jobs/my`, { headers,  params: { category }, });
         setJobs(res.data);
       } catch (err) {
         setError(err.response?.data?.message || "Error fetching jobs");
@@ -143,13 +143,25 @@ const EmployerDashboard = () => {
               className="input input-bordered w-full"
               required
             />
-            <input
-              type="text"
-              placeholder="Category"
-              value={newJob.category}
-              onChange={(e) => setNewJob({ ...newJob, category: e.target.value })}
-              className="input input-bordered w-full"
-            />
+          <select
+  value={newJob.category}
+  onChange={(e) => setNewJob({ ...newJob, category: e.target.value })}
+  className="select select-bordered w-full"
+  required
+>
+  <option value="">Select Category</option>
+  <option value="Development & IT">Development & IT</option>
+  <option value="Design & Creative">Design & Creative</option>
+  <option value="AI Services">AI Services</option>
+  <option value="Sales & Marketing">Sales & Marketing</option>
+  <option value="Writing & Translation">Writing & Translation</option>
+  <option value="Admin & Support">Admin & Support</option>
+  <option value="Finance & Accounting">Finance & Accounting</option>
+  <option value="Legal">Legal</option>
+  <option value="HR & Training">HR & Training</option>
+  <option value="Engineering & Architecture">Engineering & Architecture</option>
+</select>
+
             <input
               type="text"
               placeholder="Location"

@@ -5,12 +5,13 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import Profile from "../pages/Profile";
 import Register from "../pages/Register";
 
-import AdminDashboard from "../pages/dashboards/AdminDashboard"
+import AdminDashboard from "../pages/dashboards/AdminDashboard";
 import EmployerDashboard from "../pages/dashboards/EmployerDashboard";
 import JobSeekerDashboard from "../pages/dashboards/JobSeekerDashboard";
-
+import UserRoute from "./UserRoute";
 import AdminRoute from "./AdminRoute";
 import EmployerRoute from "./EmployerRoute";
 import JobSeekerRoute from "./JobSeekerRoute";
@@ -25,22 +26,31 @@ const router = createBrowserRouter([
       { path: "about", element: <About /> },
       { path: "contact", element: <Contact /> },
       { path: "login", element: <Login /> },
-      { path: "register", element: <Register /> }, { path: "jobs", element: <JobListings /> },
+      { path: "register", element: <Register /> },
+      { path: "jobs", element: <JobListings /> },
       { path: "jobs/:jobId", element: <JobDetails /> },
-      { path: "profile", element: <Profile /> },
+      {
+        path: "profile",
+        element: (
+          <UserRoute>
+            <Profile />
+          </UserRoute>
+        ),
+      },
+      { path: "*", element: <NotFound /> },
     ],
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />, 
+    element: <DashboardLayout />,
     children: [
       {
         path: "admin",
-        element: 
+        element: (
           <AdminRoute>
             <AdminDashboard />
           </AdminRoute>
-        ,
+        ),
       },
       {
         path: "employer",
@@ -60,6 +70,6 @@ const router = createBrowserRouter([
       },
     ],
   },
- ]);
+]);
 
 export default router;

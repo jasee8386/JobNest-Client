@@ -1,5 +1,6 @@
 import Accenture from "./Accenture.png"
 import Amazon from "./Amazon.jpg"
+import notfound from "./notfound.webp"
 import apple from "./apple.webp"
 import BGImg from "./BGImg.png"
 import download from "./download.webp" 
@@ -20,6 +21,6 @@ import logo from "./logo.png"
 export const assets = {
 Accenture,Amazon,
  BGImg ,download,
-apple ,employer,employerdash,Google,hero,ibm,jobimg,Meta,Microsoft,samsung,seekerdash,jobseeker,login,logo
+apple ,employer,employerdash,Google,hero,ibm,jobimg,Meta,Microsoft,samsung,seekerdash,jobseeker,login,logo,notfound
 
 }

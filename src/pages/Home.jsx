@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import Hero from "../components/Hero";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import JobListings from "../components/JobListings";
+import JobListSection from "../components/JobListSection";
 import JobCategories from "../components/JobCategories";
 import jobimg from "../assets/jobimg.png";
 import jobseeker from "../assets/jobseeker.jpg"
@@ -44,13 +44,13 @@ const Home = () => {
 
  
   return (
-    <div data-theme={theme} className="min-h-screen bg-base-100">
-      <Header />
+    <div data-theme={theme} className="min-h-screen bg-gradient-to-r from-green-100 via-blue-100 to-purple-100 flex flex-col w-full">
+      
       <Hero/>
       <JobCategories />
-<JobListings/>
+<JobListSection/>
       {/* How It Works Section */}
-      <section className="py-12 bg-gray-50 text-center">
+      <section className="py-12 text-center">
                <h2 className="text-2xl font-bold mb-8">How It Works</h2>
                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {/* Job Seekers Card */}
@@ -97,7 +97,7 @@ const Home = () => {
         </div>
       </section>
 
-      <Footer />
+      
     </div>
   );
 };

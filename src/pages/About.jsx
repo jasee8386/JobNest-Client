@@ -8,9 +8,9 @@ const About = () => {
   return (
      <div data-theme={theme} className="min-h-screen bg-base-100">
       <Header />
-    <div className="min-h-screen bg-base-200 flex flex-col items-center justify-center px-6 py-16">
+    <div className="min-h-screen bg-gradient-to-r from-green-100 via-blue-100 to-purple-100 flex flex-col items-center justify-center px-6 py-12">
       <div className="max-w-3xl text-center">
-        <h1 className="text-5xl font-extrabold mb-6 text-primary">
+        <h1 className="text-5xl md:text-6xl font-extrabold mb-4 text-gray-800 text-center">
           About JobNest
         </h1>
         <p className="text-lg leading-relaxed text-gray-600 mb-6">

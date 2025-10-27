@@ -30,71 +30,41 @@ const Hero = () => {
 
   return (
     <div>
-      <section
-        className="h-[70vh] md:h-[60vh] bg-cover bg-center relative"
-        style={{ backgroundImage: `url(${assets.BGImg})` }}
+     <section
+  className="h-[70vh] md:h-[60vh] bg-cover bg-center relative"
+  style={{ backgroundImage: `url(${assets.jobimg})` }}
+>
+  <div className="absolute inset-0 bg-black/30"></div>
+
+  <div className="text-center relative z-10 flex flex-col items-center gap-3">
+    <div className="max-w-2xl">
+      <h1 className="text-3xl md:text-5xl font-extrabold mb-4 text-gray-900 text-center">
+        Launch Your Career Today
+      </h1>
+      <p className="mb-4 text-base md:text-lg text-gray-800">
+        Explore thousands of jobs and take the next step toward your dream career
+      </p>
+
+      <form
+        onSubmit={handleSearch}
+        className="flex w-full max-w-md mx-auto bg-white rounded-full shadow-lg overflow-hidden mb-6"
       >
-        <div className="absolute inset-0 bg-black/30"></div>
+        <input
+          type="text"
+          placeholder="Search jobs..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="flex-1 px-4 py-2 text-gray-800 outline-none"
+        />
+        <button type="submit" className="bg-blue-600 text-white px-6 py-2">
+          Search
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
 
-        <div className="text-neutral-content text-center relative z-10 flex flex-col items-center gap-3">
-          <div className="max-w-2xl">
-            <h1 className="mb-4 text-3xl md:text-4xl font-bold">
-              Launch Your Career Today
-            </h1>
-            <p className="mb-4 text-base md:text-lg">
-              Explore thousands of jobs and take the next step toward your dream
-              career
-            </p>
 
-            <form
-              onSubmit={handleSearch}
-              className="flex w-full max-w-md mx-auto bg-white rounded-full shadow-lg overflow-hidden mb-6"
-            >
-              <input
-                type="text"
-                placeholder="Search jobs..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="flex-1 px-4 py-2 text-gray-800 outline-none"
-              />
-              <button
-                type="submit"
-                className="bg-blue-600 text-white px-6 py-2"
-              >
-                Search
-              </button>
-            </form>
-
-            <div className="flex justify-center gap-4">
-              {!token ? (
-                <>
-                  <Link
-                    to="/register"
-                    className="bg-green-600 text-white px-6 py-2 rounded"
-                  >
-                    Register
-                  </Link>
-                  <Link
-                    to="/login"
-                    className="bg-blue-600 text-white px-6 py-2 rounded"
-                  >
-                    Login
-                  </Link>
-                </>
-              ) : (
-                role === "employer" && (
-                  <Link
-                    to="/dashboard/employer"
-                    className="bg-purple-600 text-white px-6 py-2 rounded"
-                  >
-                    Post a Job
-                  </Link>
-                )
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
       <div className="border border-gray shadow-md mx-2 mt-5 p-6 rounded-md flex">
         <div className="flex justify-center gap-10 lg:gap-16 flex-wrap">
           <p className="font-medium">Trusted By</p>

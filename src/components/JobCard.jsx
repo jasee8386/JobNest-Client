@@ -1,9 +1,11 @@
 // src/components/JobCard.jsx
 import { Briefcase, MapPin, Clock } from "lucide-react";
 
+ 
 const JobCard = ({ job, onApply }) => {
+  
   return (
-    <div className="card bg-base-100 shadow-md hover:shadow-xl transition rounded-2xl p-4">
+        <div className="card bg-base-100 shadow-md hover:shadow-xl transition rounded-2xl p-4">
       <div className="flex justify-between items-start">
         <div>
           <h2 className="card-title text-lg">{job.title}</h2>
@@ -27,7 +29,7 @@ const JobCard = ({ job, onApply }) => {
         </button>
       </div>
     </div>
-  );
+     );
 };
 
 export default JobCard;

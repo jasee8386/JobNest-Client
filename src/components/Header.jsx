@@ -67,7 +67,7 @@ JobNest</Link>
   
 </div>
 
-      <div className="navbar-end">
+      <div className="navbar-end gap-4">
          <ThemeToggle />
                         <div className="flex-none">
           <div className="dropdown dropdown-end mr-3">
@@ -85,23 +85,26 @@ JobNest</Link>
                     />
                   </div>
                 </div>
-                <ul
-                  tabIndex={0}
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-                >
-                  <li>
-                    <Link className="justify-between">
-                      Profile
-                      <span className="badge">New</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link>Settings</Link>
-                  </li>
-                  <li>
-                    <Link>Logout</Link>
-                  </li>
-                </ul>
+               <ul
+  tabIndex={0}
+  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+>
+  <li>
+    <Link to="/profile" className="justify-between">
+      Profile
+      <span className="badge">New</span>
+    </Link>
+  </li>
+  <li>
+    <Link to="/settings">Settings</Link>
+  </li>
+  <li>
+    <Link to="/login" onClick={() => localStorage.removeItem("token")}>
+      Logout
+    </Link>
+  </li>
+</ul>
+
               </>
             ) : (
               <Link to="/login">Login</Link>

@@ -16,6 +16,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import EmployerDashboard from "./pages/dashboards/EmployerDashboard"
 import JobSeekerDashboard from "./pages/dashboards/JobSeekerDashboard";
 import AdminDashboard from "./pages/dashboards/AdminDashboard";
+import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
 import { AuthProvider } from "./context/AuthContext";
 const ThemeWrapper = ({ children }) => {
   const theme = useSelector((state) => state.theme.value);
@@ -34,12 +36,16 @@ const router = createBrowserRouter([
       { path: "about", element: <About /> },
       { path: "contact", element: <Contact /> },
       { path: "login", element: <Login /> },
+      { path: "profile", element: <Profile /> },
+      
+      
       {
         path: "register",
         element: <Register />,
       },
       { path: "jobs", element: <JobListings /> },
       { path: "jobs/:jobId", element: <JobDetails /> },
+        { path: "*", element: <NotFound /> },
     ],
   },
   {

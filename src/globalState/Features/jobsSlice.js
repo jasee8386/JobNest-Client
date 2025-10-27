@@ -4,9 +4,9 @@ import jobService from "../../services/jobService";
 // 🔹 Fetch all verified jobs
 export const fetchJobs = createAsyncThunk(
   "jobs/fetchJobs",
-  async (_, thunkAPI) => {
+  async ({ query = "", category = "", page = 1 }, thunkAPI) => {
     try {
-      return await jobService.getJobs();
+      return await jobService.getJobs(query, category, page);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }

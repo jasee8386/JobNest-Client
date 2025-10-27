@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const categories = [
   { name: "Development & IT", icon: "💻" },
@@ -22,7 +23,7 @@ export default function JobCategories({ onSelect }) {
   };
 
   return (
-    <section className="py-12 px-6 bg-white">
+    <section className="py-12 px-6 ">
       <h2 className="text-2xl font-bold text-center mb-8">
         Browse by Categories
       </h2>

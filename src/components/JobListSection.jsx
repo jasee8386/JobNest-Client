@@ -2,39 +2,50 @@ import React, { useEffect, useState } from "react";
 import { assets } from '../assets/assets'
 import { Link } from "react-router-dom";
 import axios from "axios";
-
- 
+import Header from "./Header";
+import Footer from "./Footer";
+ import { useSelector } from "react-redux";
 const backendBaseUrl = import.meta.env.VITE_BACKEND_API;
-const JobListings = () => { 
+
+const JobListSection = ({ category }) => { 
+   const theme = useSelector((state) => state.theme.value);
       const [search, setSearch] = useState(""); 
     const [jobs, setJobs] = useState([]); 
      // Fetch jobs from backend
-  const fetchJobs = async (query = "") => {
+  const fetchJobs = async (query = "", cat = "") => {
     try {
       const url = query
         ? `${backendBaseUrl}/jobs?search=${encodeURIComponent(query)}`
         : `${backendBaseUrl}/jobs`;
-      const res = await axios.get(url);
-      setJobs(res.data);
+      const res = await axios.get(url, { params: { search: query, category: cat } });
+      setJobs(res.data.jobs || res.data);
     } catch (err) {
       console.error("Error fetching jobs:", err);
     }
   };
 
   useEffect(() => {
-    fetchJobs();
-  }, []);
-
+    fetchJobs(search, category);
+  }, [category]);
+ const handleSearch = (e) => {
+    e.preventDefault();
+    fetchJobs(search);
+  };
   return (
-    
-    <div> 
-        {/* Sidebar */}
-        <div>
-             {/* Search Filter from Hero Component */}
-             {
-                 
-             }
-        </div>
+     <div>
+        <form
+        onSubmit={handleSearch}
+        className="flex flex-col md:flex-row justify-center items-center gap-3 mt-8"
+      >
+        <input
+          type="text"
+          placeholder="Search by title or location"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="input input-bordered w-full md:w-1/3"
+        />
+        <button type="submit" className="btn btn-primary">Search</button>
+      </form>
               {/* Job Listings */}
               <section
                 className="jobimg min-h-screen bg-cover bg-center relative"
@@ -60,7 +71,12 @@ const JobListings = () => {
                             <p className="text-sm text-gray-500">{job.location}</p>
                             <p className="text-sm mt-1">
                               {job.jobType} | {job.workType}
-                            </p>
+                            </p>                    {job.category && (
+                      <p className="text-sm text-green-600 mt-2">
+                        Category: {job.category}
+                      </p>
+                    )}
+
                           </Link>
                         ))}
                       </div>
@@ -68,9 +84,9 @@ const JobListings = () => {
                   </div>
                 </div>
               </section>
-        
     </div>
+     
   )
 }
 
-export default JobListings
+export default JobListSection
