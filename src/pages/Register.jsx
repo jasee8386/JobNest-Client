@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+
 import { FcGoogle } from "react-icons/fc";
 import { assets } from "../assets/assets";
 
