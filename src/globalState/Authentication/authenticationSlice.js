@@ -17,8 +17,11 @@ export const authenticationSlice = createSlice({
       state.isAuthenticated = false;
       localStorage.removeItem("token");
     },
+     updateIsAuthenticated: (state, action) => {  
+    state.isAuthenticated = action.payload;
+  },
   },
 });
 
-export const { loginSuccess, logout } = authenticationSlice.actions;
+export const { loginSuccess, logout,updateIsAuthenticated  } = authenticationSlice.actions;
 export default authenticationSlice.reducer;

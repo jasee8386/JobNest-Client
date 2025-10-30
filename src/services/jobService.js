@@ -24,7 +24,7 @@ const applyJob = async (jobId, formData = {}) => {
   const token = localStorage.getItem("token");
 
   const response = await axios.post(
-    `${API_URL}/${jobId}/apply`,
+    `${API_URL}/applications/${jobId}/apply`,
     formData,
     {
       headers: { Authorization: `Bearer ${token}` },

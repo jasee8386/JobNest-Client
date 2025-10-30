@@ -49,7 +49,7 @@ const JobListings = () => {
     }
     try {
       const res = await axios.post(
-        `${backendBaseUrl}/application/${jobId}/apply`,
+        `${backendBaseUrl}/applicationsc/${jobId}/apply`,
         {
           resume: "https://example.com/resume.pdf",
           coverLetter: "",
